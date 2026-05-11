@@ -1,0 +1,3 @@
+Cluster,employee_count,attrition_yes_count,attrition_no_count,attrition_rate,attrition_rate_percent
+0,1005,193,812,0.19203980099502488,19.203980099502488
+1,465,44,421,0.09462365591397849,9.46236559139785

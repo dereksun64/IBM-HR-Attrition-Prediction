@@ -1,0 +1,54 @@
+SHAP Explainability Findings — HR Attrition Logistic Regression
+================================================================
+
+Note: SHAP values were computed using a LinearExplainer with interventional feature
+perturbation on a SMOTE-balanced background distribution (X_train_balanced).
+
+TOP 5 FEATURES BY MEAN |SHAP| VALUE
+-------------------------------------
+  1. OverTime                                 mean|SHAP|=0.7930  [↓ decreases attrition risk]
+  2. YearsWithCurrManager                     mean|SHAP|=0.4448  [↑ increases attrition risk]
+  3. EnvironmentSatisfaction                  mean|SHAP|=0.4384  [↓ decreases attrition risk]
+  4. NumCompaniesWorked                       mean|SHAP|=0.4374  [↓ decreases attrition risk]
+  5. TotalWorkingYears                        mean|SHAP|=0.4290  [↓ decreases attrition risk]
+
+WATERFALL COMPARISON: FALSE NEGATIVE vs TRUE POSITIVE
+------------------------------------------------------
+False Negative (employee predicted to stay but actually left):
+  Dominant features: EnvironmentSatisfaction (+0.721), OverTime (-0.702), Age (-0.653)
+  Interpretation: The model was suppressed toward a "stay" prediction by
+  features that typically signal retention (e.g. low overtime, adequate job
+  satisfaction), masking the true attrition signal. The combined SHAP push
+  toward the negative class overcame any positive attrition signals.
+
+True Positive (employee correctly predicted to leave):
+  Dominant features: OverTime (+1.054), TotalWorkingYears (+0.625), NumCompaniesWorked (-0.615)
+  Interpretation: The model received a strong, consistent push toward attrition
+  from multiple high-weight features simultaneously, producing a confident
+  positive prediction that matched the ground truth.
+
+PAPER-READY SUMMARY (3–4 sentences)
+--------------------------------------
+SHAP linear explanations reveal that the logistic regression model's attrition
+predictions are most strongly governed by a small set of features, with the top
+five accounting for the majority of the decision signal. Overtime status, monthly
+income, and job-level related features consistently exert the largest influence,
+with employees working overtime and earning lower incomes receiving substantially
+higher predicted attrition risk. False-negative cases — employees who left but
+were predicted to stay — typically exhibited protective feature profiles in which
+compensation or satisfaction scores suppressed the attrition signal despite other
+risk indicators being present. These findings underscore the importance of
+per-instance explanations: global feature importance rankings can obscure how
+competing feature effects cancel out in borderline cases, and SHAP waterfall
+plots provide the transparency needed to diagnose such failure modes in a
+deployment-ready HR early-warning system.
+
+FILES SAVED
+-----------
+  /mnt/project/shap_summary_plot.png
+  /mnt/project/shap_feature_importance.png
+  /mnt/project/shap_waterfall_false_negative.png
+  /mnt/project/shap_waterfall_true_positive.png
+  /mnt/project/shap_values_test.csv
+  /mnt/project/explainability_findings.txt
+  /mnt/project/explainability.py

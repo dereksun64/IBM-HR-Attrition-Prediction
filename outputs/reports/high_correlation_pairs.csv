@@ -1,0 +1,8 @@
+Feature_1,Feature_2,Correlation
+JobLevel,MonthlyIncome,0.9502999134798473
+JobLevel,TotalWorkingYears,0.7822078045362748
+MonthlyIncome,TotalWorkingYears,0.7728932462543574
+PercentSalaryHike,PerformanceRating,0.7735499964012664
+YearsAtCompany,YearsInCurrentRole,0.7587537366134619
+YearsAtCompany,YearsWithCurrManager,0.7692124251007031
+YearsInCurrentRole,YearsWithCurrManager,0.7143647616385931

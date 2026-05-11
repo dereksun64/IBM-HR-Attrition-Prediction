@@ -1,0 +1,51 @@
+ERROR ANALYSIS FINDINGS — Logistic Regression (Balanced, Round 1)
+==================================================================
+
+SEGMENT COUNTS
+  True Positives (TP):  37
+  True Negatives (TN):  190
+  False Positives (FP): 57
+  False Negatives (FN): 10
+
+TOP 3 DIVERGING FEATURES (FN vs TP, normalized)
+  YearsAtCompany: norm_diff=+1.643 (higher in FN) | FN mean=14.20, TP mean=3.86
+  OverTime: norm_diff=-1.559 (lower in FN) | FN mean=0.10, TP mean=0.78
+  TotalWorkingYears: norm_diff=+1.484 (higher in FN) | FN mean=18.00, TP mean=6.57
+
+CATEGORICAL CONCENTRATIONS (FN rate > 50%)
+  JobRole=Manufacturing Director (FN rate: 67%)
+JobRole=Research Director (FN rate: 100%)
+
+FULL CATEGORICAL FN RATES
+
+  Department:
+    Human Resources: FN=1, TP=1, FN_rate=50.0%
+    Research & Development: FN=8, TP=21, FN_rate=27.6%
+    Sales: FN=1, TP=15, FN_rate=6.2%
+
+  JobRole:
+    Healthcare Representative: FN=1, TP=2, FN_rate=33.3%
+    Human Resources: FN=1, TP=1, FN_rate=50.0%
+    Laboratory Technician: FN=0, TP=4, FN_rate=0.0%
+    Manager: FN=0, TP=0, FN_rate=nan%
+    Manufacturing Director: FN=2, TP=1, FN_rate=66.7%
+    Research Director: FN=1, TP=0, FN_rate=100.0%
+    Research Scientist: FN=4, TP=14, FN_rate=22.2%
+    Sales Executive: FN=0, TP=8, FN_rate=0.0%
+    Sales Representative: FN=1, TP=7, FN_rate=12.5%
+
+  MaritalStatus:
+    Divorced: FN=0, TP=4, FN_rate=0.0%
+    Married: FN=5, TP=13, FN_rate=27.8%
+    Single: FN=5, TP=20, FN_rate=20.0%
+
+DISCUSSION (Plain English)
+  The model's false negatives — employees who actually left but were predicted to stay —
+  tend to differ from correctly identified leavers primarily along career-tenure and
+  compensation dimensions. Missed leavers typically had longer company tenures and higher
+  monthly incomes, suggesting the model over-relies on patterns from early-career, lower-paid
+  employees who are more visibly at risk. Additionally, employees without overtime were more
+  likely to be missed, indicating that the model heavily weights overtime as an attrition signal
+  and under-captures dissatisfaction among non-overtime employees. HR interventions should
+  therefore extend beyond overtime-flagged staff to monitor longer-tenured, higher-earning
+  employees who may be silently disengaged.
